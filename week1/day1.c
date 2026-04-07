@@ -1,0 +1,1 @@
+// Structure of a C program: #include, main(), printf, return 0.

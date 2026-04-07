@@ -1,0 +1,1 @@
+//A pointer stores the memory address of a variable. * dereferences (gets value). & gets address.

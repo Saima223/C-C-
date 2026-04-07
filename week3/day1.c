@@ -1,0 +1,1 @@
+// Functions avoid code repetition. Prototype (declaration), definition, call. return sends value back.
