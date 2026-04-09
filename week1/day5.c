@@ -105,10 +105,36 @@ int main() {
     NOTE:
     Avoid undefined behavior like:
     printf("%d %d %d", a, a++, ++a);
-    */
+    
+
+    int num3 = 10, num4 = 3;
+
+    // ===== INTEGER VS FLOAT DIVISION =====
+    printf("Integer division: %d\n", num3 / num4);         // 3
+    printf("Float division: %.2f\n", (float)num3 / num4); // 3.33
+
+    // ===== IMPLICIT TYPE CONVERSION =====
+    int x = 5;
+    float y = 2.5;
+
+    float result1 = x + y; // x becomes 5.0 automatically
+    printf("\nImplicit Conversion (x + y): %.2f\n", result1);
+
+    // ===== EXPLICIT TYPE CONVERSION =====
+    int p = 7, q = 2;
+
+    float result2 = (float)p / q;
+    printf("Explicit Conversion (p/q): %.2f\n", result2);
+
+    // ===== TYPE LOSS (IMPORTANT) =====
+    float num = 9.8;
+    int converted = (int)num;
+
+    printf("\nBefore conversion: %.2f\n", num);
+    printf("After conversion to int: %d\n", converted); // 9
 
     return 0;
-    /*
+    
     Q: What is implicit casting?
 A: Automatic conversion done by compiler. int + float → float automatically. No data loss going to larger type.
 Q: What is truncation?
