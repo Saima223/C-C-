@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C & C++ Monthly Study Plan</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, sans-serif;
+            background: #f5f4ef;
+            color: #1a1a18;
+            padding: 1rem;
+        }
+
+        h1 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .sg {
+            background: #fff;
+            border: 0.5px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .sg-top {
+            font-size: 10px;
+            color: #888;
+            margin-bottom: 3px;
+        }
+
+        .sg-mid {
+            font-size: 12px;
+            font-weight: 600;
+            color: #222;
+            line-height: 1.4;
+        }
+
+        .wtabs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .wtab {
+            padding: 7px 14px;
+            border-radius: 8px;
+            border: 0.5px solid #ccc;
+            background: #eee;
+            color: #555;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .wtab.active {
+            background: #fff;
+            color: #111;
+            border-color: #999;
+            font-weight: 600;
+        }
+
+        .panel {
+            display: none;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        .wk-badge {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 9px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .wk-desc {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .day-card {
+            background: #fff;
+            border: 0.5px solid #ddd;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .day-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            cursor: pointer;
+        }
+
+        .day-head:hover {
+            background: #f8f8f6;
+        }
+
+        .dlabel {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .dtitle {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a1a18;
+            flex: 1;
+        }
+
+        .dchap {
+            font-size: 11px;
+            color: #aaa;
+            white-space: nowrap;
+        }
+
+        .darrow {
+            font-size: 12px;
+            color: #aaa;
+            transition: transform .2s;
+        }
+
+        .darrow.open {
+            transform: rotate(90deg);
+        }
+
+        .dbody {
+            display: none;
+            padding: 14px;
+            border-top: 0.5px solid #eee;
+        }
+
+        .dbody.open {
+            display: block;
+        }
+
+        .sl {
+            font-size: 10px;
+            font-weight: 700;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin: 10px 0 5px;
+        }
+
+        .sl:first-child {
+            margin-top: 0;
+        }
+
+        pre {
+            background: #f5f4ef;
+            border: 0.5px solid #ddd;
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-family: 'Courier New', monospace;
+            font-size: 11.5px;
+            line-height: 1.75;
+            overflow-x: auto;
+            color: #1a1a18;
+            white-space: pre;
+            margin: 0;
+        }
+
+        .kw {
+            color: #534AB7;
+            font-weight: 700;
+        }
+
+        .cm {
+            color: #999;
+            font-style: italic;
+        }
+
+        .str {
+            color: #0F6E56;
+        }
+
+        .num {
+            color: #854F0B;
+        }
+
+        .fn {
+            color: #185FA5;
+        }
+
+        .pp {
+            color: #993C1D;
+        }
+
+        .qna {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .qq {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #1a1a18;
+        }
+
+        .aa {
+            font-size: 12.5px;
+            color: #555;
+            margin-left: 12px;
+            line-height: 1.6;
+        }
+
+        code {
+            font-family: monospace;
+            font-size: 11.5px;
+            background: #f0efe9;
+            padding: 1px 5px;
+            border-radius: 4px;
+        }
+
+        ul.tl {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        ul.tl li {
+            font-size: 12.5px;
+            color: #333;
+            padding-left: 14px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        ul.tl li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: #aaa;
+        }
+
+        .final-card {
+            background: #fff;
+            border: 0.5px solid #ddd;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .final-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 0 8px;
+        }
+
+        .tip {
+            background: #e8f4fd;
+            border-left: 3px solid #4a90d9;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: 12.5px;
+            color: #1a5276;
+            margin: 8px 0;
+        }
+
+        @media (max-width: 500px) {
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>C & C++ Complete Monthly Study Plan</h1>
+    <p class="subtitle">20 chapters · 28 study days · 4 mini tests · 1 final project · Mapped to your syllabus</p>
+
+    <div class="summary-grid">
+        <div class="sg">
+            <div class="sg-top">Week 1</div>
+            <div class="sg-mid">C Foundations<br><span style="font-size:10px;color:#aaa">Ch 1–2</span></div>
+        </div>
+        <div class="sg">
+            <div class="sg-top">Week 2</div>
+            <div class="sg-mid">Control Flow<br><span style="font-size:10px;color:#aaa">Ch 3–4</span></div>
+        </div>
+        <div class="sg">
+            <div class="sg-top">Week 3</div>
+            <div class="sg-mid">Arrays & Functions<br><span style="font-size:10px;color:#aaa">Ch 5–7</span></div>
+        </div>
+        <div class="sg">
+            <div class="sg-top">Week 4</div>
+            <div class="sg-mid">Structs → C++<br><span style="font-size:10px;color:#aaa">Ch 8–16</span></div>
+        </div>
+        <div class="sg">
+            <div class="sg-top">Days 29–30</div>
+            <div class="sg-mid">Final Project<br><span style="font-size:10px;color:#aaa">All chapters</span></div>
+        </div>
+    </div>
+
+    <div class="wtabs">
+        <button class="wtab active" onclick="sw(1,this)">Week 1 — C Foundations</button>
+        <button class="wtab" onclick="sw(2,this)">Week 2 — Control Flow</button>
+        <button class="wtab" onclick="sw(3,this)">Week 3 — Arrays & Functions</button>
+        <button class="wtab" onclick="sw(4,this)">Week 4 — Structs to C++</button>
+        <button class="wtab" onclick="sw(5,this)">Final Assignment</button>
+    </div>
+
+    <div id="p1" class="panel active"></div>
+    <div id="p2" class="panel"></div>
+    <div id="p3" class="panel"></div>
+    <div id="p4" class="panel"></div>
+
+    <div id="p5" class="panel">
+        <span class="wk-badge" style="background:#FCEBEB;color:#A32D2D">Final Assignment — Days 29–30</span>
+        <p class="wk-desc">Build a complete C++ OOP Student Management System using every chapter of the syllabus.</p>
+        <div class="final-card">
+            <div class="final-title">Project — C++ Student Management System</div>
+            <p style="font-size:12.5px;color:#666;margin-bottom:10px">Menu-driven app: Classes, Inheritance, Virtual
+                functions, Operator Overloading, File I/O, Exceptions.</p>
+            <div class="sl">Structure</div>
+            <pre><span class="pp">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;</span>
+<span class="kw">using namespace</span> std;
+
+<span class="cm">// Ch 14 — Base class with pure virtual</span>
+<span class="kw">class</span> <span class="fn">Person</span> {
+<span class="kw">protected</span>:
+    string name; <span class="kw">int</span> age;
+<span class="kw">public</span>:
+    <span class="fn">Person</span>(string n, <span class="kw">int</span> a) : name(n), age(a) {}
+    <span class="kw">virtual void</span> <span class="fn">display</span>() = <span class="num">0</span>;  <span class="cm">// pure virtual</span>
+    <span class="kw">virtual</span> ~<span class="fn">Person</span>() {}
+};
+
+<span class="cm">// Ch 18 — Derived class</span>
+<span class="kw">class</span> <span class="fn">Student</span> : <span class="kw">public</span> <span class="fn">Person</span> {
+    <span class="kw">int</span>   roll;
+    <span class="kw">float</span> m[<span class="num">3</span>];
+<span class="kw">public</span>:
+    <span class="fn">Student</span>(string n, <span class="kw">int</span> a, <span class="kw">int</span> r, <span class="kw">float</span> m1, <span class="kw">float</span> m2, <span class="kw">float</span> m3)
+        : <span class="fn">Person</span>(n, a), roll(r) { m[<span class="num">0</span>]=m1; m[<span class="num">1</span>]=m2; m[<span class="num">2</span>]=m3; }
+    <span class="kw">float</span> <span class="fn">avg</span>()   { <span class="kw">return</span> (m[<span class="num">0</span>]+m[<span class="num">1</span>]+m[<span class="num">2</span>])/<span class="num">3</span>; }
+    <span class="kw">char</span>  <span class="fn">grade</span>() { <span class="kw">return</span> avg()>=<span class="num">80</span>?'A':avg()>=<span class="num">60</span>?'B':avg()>=<span class="num">40</span>?'C':'F'; }
+    <span class="kw">void</span>  <span class="fn">display</span>() <span class="kw">override</span>;
+    <span class="cm">// Ch 17 — Operator overloading</span>
+    <span class="kw">bool operator</span>&gt;(Student& s) { <span class="kw">return</span> <span class="fn">avg</span>() > s.<span class="fn">avg</span>(); }
+    <span class="kw">friend</span> ostream& <span class="kw">operator</span>&lt;&lt;(ostream& o, Student& s);
+    <span class="kw">friend</span> istream& <span class="kw">operator</span>&gt;&gt;(istream& i, Student& s);
+};
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    vector&lt;Student*&gt; students;
+    <span class="cm">// Ch 20 — exception handling</span>
+    <span class="kw">try</span> {
+        ifstream f(<span class="str">"records.txt"</span>);
+        <span class="kw">if</span>(!f) <span class="kw">throw</span> runtime_error(<span class="str">"File not found"</span>);
+    } <span class="kw">catch</span>(exception& e) { cout &lt;&lt; e.<span class="fn">what</span>() &lt;&lt; endl; }
+    <span class="cm">// Menu with do-while + switch</span>
+    <span class="kw">int</span> ch;
+    <span class="kw">do</span> {
+        cout &lt;&lt; <span class="str">"\n1.Add 2.Display 3.Search 4.Topper 5.Save 0.Exit\n"</span>;
+        cin &gt;&gt; ch;
+        <span class="kw">switch</span>(ch) { <span class="cm">/* implement each case */</span> }
+    } <span class="kw">while</span>(ch != <span class="num">0</span>);
+}</pre>
+        </div>
+        <div class="final-card">
+            <div class="final-title">Grading checklist</div>
+            <ul class="tl">
+                <li>Compiles with zero errors and zero warnings</li>
+                <li>Person base class with pure virtual display() — polymorphism works via base pointer</li>
+                <li>Student derived correctly — constructor chain with Person(n,a) call</li>
+                <li>Average and grade correct (A≥80, B≥60, C≥40, F below)</li>
+                <li>operator&gt; compares by average; operator&lt;&lt; prints cleanly with cout</li>
+                <li>File saves on exit, loads on startup — data survives close and reopen</li>
+                <li>try-catch handles missing file and invalid input gracefully</li>
+                <li>Menu loops until user enters 0</li>
+                <li>Every class and function has a comment explaining its purpose</li>
+            </ul>
+            <div class="tip" style="margin-top:10px">If you can build this from scratch without notes, you have mastered
+                the complete C &amp; C++ syllabus.</div>
+        </div>
+    </div>
+
+    <script>
+        const weeks = {
+            1: {
+                badge: "Week 1 — C Foundations (Days 1–7)", bstyle: "background:#E1F5EE;color:#0F6E56",
+                desc: "Ch 1 & 2: program structure, data types, scanf/printf, operators, precedence, constants, scope.",
+                days: [
+                    {
+                        day: "Day 1", label: "Done", ls: "background:#E1F5EE;color:#0F6E56", topic: "Ch 1 — Program structure + Hello World", chap: "Ch 1.1–1.5",
+                        theory: "Types of languages (low/high level). C evolution. Structure: preprocessor → main() → statements → return 0. Compile with gcc, run.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>   <span class="cm">// header — gives printf, scanf</span>
+
+<span class="cm">/* main() — entry point of every C program */</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="fn">printf</span>(<span class="str">"Hello, C!\\n"</span>);    <span class="cm">// \\n = newline</span>
+    <span class="fn">printf</span>(<span class="str">"Name:\\tNitin\\n"</span>); <span class="cm">// \\t = tab</span>
+    <span class="kw">return</span> <span class="num">0</span>;  <span class="cm">// 0 = success</span>
+}`,
+                        tasks: ["Print your name, college, branch — each on a new line using \\n", "Use \\t to align two columns of text", "Find and fix: printf(Hello); — what is wrong?"],
+                        qna: [{ q: "What does #include do?", a: "Tells compiler to include a header file before compiling. stdio.h gives access to printf and scanf. Without it, compiler doesn't know what printf means." }, { q: "Why return 0 from main?", a: "Signals successful program exit to the OS. Non-zero return means an error. Required because main is declared as int." }, { q: "Difference between /* */ and //?", a: "/* */ is a block comment spanning multiple lines. // is a line comment ending at the line break. Both are ignored by the compiler — documentation only." }]
+                    },
+                    {
+                        day: "Day 2", label: "Done", ls: "background:#E1F5EE;color:#0F6E56", topic: "Ch 2 — Data types, variables, format specifiers", chap: "Ch 2.1–2.5",
+                        theory: "int, float, double, char, string (char array). Declaration vs initialization. Format specifiers: %d %f %lf %c %s. sizeof() operator.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span>    age    = <span class="num">20</span>;        <span class="cm">// format: %d or %i</span>
+    <span class="kw">float</span>  marks  = <span class="num">88.5f</span>;    <span class="cm">// format: %f</span>
+    <span class="kw">double</span> pi     = <span class="num">3.14159</span>;  <span class="cm">// format: %lf</span>
+    <span class="kw">char</span>   grade  = <span class="str">'A'</span>;      <span class="cm">// format: %c</span>
+    <span class="kw">char</span>   name[<span class="num">20</span>] = <span class="str">"Nitin"</span>; <span class="cm">// format: %s</span>
+
+    <span class="fn">printf</span>(<span class="str">"Age:   %d\\n"</span>,   age);
+    <span class="fn">printf</span>(<span class="str">"Marks: %.2f\\n"</span>, marks);
+    <span class="fn">printf</span>(<span class="str">"Pi:    %lf\\n"</span>,  pi);
+    <span class="fn">printf</span>(<span class="str">"Grade: %c\\n"</span>,   grade);
+    <span class="fn">printf</span>(<span class="str">"Name:  %s\\n"</span>,   name);
+
+    <span class="fn">printf</span>(<span class="str">"int=%zu float=%zu double=%zu char=%zu\\n"</span>,
+        <span class="kw">sizeof</span>(<span class="kw">int</span>), <span class="kw">sizeof</span>(<span class="kw">float</span>), <span class="kw">sizeof</span>(<span class="kw">double</span>), <span class="kw">sizeof</span>(<span class="kw">char</span>));
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Declare all 5 data types, print each with correct format specifier", "Print sizeof every type and note the sizes", "Try printing float with %d — observe the garbage output and explain why"],
+                        qna: [{ q: "Difference between float and double?", a: "float = 4 bytes, ~6-7 significant digits. double = 8 bytes, ~15 digits. Use double for scientific or financial calculations where precision matters." }, { q: "Why 'f' suffix in 88.5f?", a: "Without f, the literal is double by default. The f suffix tells the compiler to treat it as a float literal, avoiding an implicit conversion warning." }, { q: "What happens if you forget to initialize a variable?", a: "Local variables contain garbage values — whatever bytes happened to be at that memory location before. Always initialize variables before reading them." }]
+                    },
+                    {
+                        day: "Day 3", label: "Today", ls: "background:#EEEDFE;color:#534AB7", topic: "Ch 2 — scanf() input + type casting", chap: "Ch 2.4–2.5",
+                        theory: "scanf reads keyboard input. & (address-of) tells scanf WHERE to store value. String arrays don't need &. Type casting: implicit vs explicit.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span>   a, b;
+    <span class="fn">printf</span>(<span class="str">"Enter two numbers: "</span>);
+    <span class="fn">scanf</span>(<span class="str">"%d %d"</span>, &amp;a, &amp;b); <span class="cm">// & = address of</span>
+
+    <span class="cm">/* integer division — decimal dropped */</span>
+    <span class="fn">printf</span>(<span class="str">"Int division:   %d\\n"</span>, a / b);
+
+    <span class="cm">/* explicit cast to get float result */</span>
+    <span class="fn">printf</span>(<span class="str">"Float division: %.2f\\n"</span>, (<span class="kw">float</span>)a / b);
+
+    <span class="cm">/* implicit cast — int auto-converts to float */</span>
+    <span class="kw">float</span> result = a;
+    <span class="fn">printf</span>(<span class="str">"Implicit cast:  %.1f\\n"</span>, result);
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Take name, age, height — print formatted student card", "Temperature converter: read Celsius, print Fahrenheit: F = C*9/5 + 32", "BMI calculator: read weight and height, compute and print BMI"],
+                        qna: [{ q: "Why & in scanf but not printf?", a: "scanf needs to WRITE to the variable — it needs the memory address to store there. printf only READS the value to display it, address not needed." }, { q: "What is truncation in integer division?", a: "7/2 gives 3, not 3.5. The decimal part is silently dropped. Use (float)7/2 or 7.0/2 to get 2.5." }, { q: 'Space before %c in scanf: scanf(" %c")?', a: "The space flushes the leftover newline from the previous Enter key press, preventing it from being read as your character input." }]
+                    },
+                    {
+                        day: "Day 4", label: "Day 4", ls: "", topic: "Ch 2 — All operators", chap: "Ch 2.2",
+                        theory: "Arithmetic, relational, logical, assignment, increment/decrement, bitwise, sizeof, ternary. Pre vs post increment.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> a=<span class="num">10</span>, b=<span class="num">3</span>;
+    <span class="cm">/* Arithmetic */</span>
+    <span class="fn">printf</span>(<span class="str">"%d %d %d %d %d\\n"</span>, a+b, a-b, a*b, a/b, a%b);
+    <span class="cm">//  13   7   30    3    1</span>
+
+    <span class="cm">/* Relational — gives 1 (true) or 0 (false) */</span>
+    <span class="fn">printf</span>(<span class="str">"%d %d %d\\n"</span>, a==b, a!=b, a&gt;b); <span class="cm">// 0 1 1</span>
+
+    <span class="cm">/* Logical */</span>
+    <span class="fn">printf</span>(<span class="str">"%d %d\\n"</span>, (a&gt;<span class="num">5</span>)&amp;&amp;(b&gt;<span class="num">1</span>), (a&lt;<span class="num">5</span>)||(b&gt;<span class="num">1</span>)); <span class="cm">// 1 1</span>
+
+    <span class="cm">/* Ternary operator */</span>
+    <span class="kw">int</span> max = (a &gt; b) ? a : b;
+    <span class="fn">printf</span>(<span class="str">"Max=%d sizeof(int)=%zu\\n"</span>, max, <span class="kw">sizeof</span>(<span class="kw">int</span>));
+
+    <span class="cm">/* Pre vs post increment */</span>
+    <span class="kw">int</span> x=<span class="num">5</span>;
+    <span class="fn">printf</span>(<span class="str">"%d %d\\n"</span>, x++, ++x); <span class="cm">// 5  7</span>
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Calculator: take 2 numbers, print all 5 arithmetic results", "Even/odd checker using % operator", "Find largest of 3 numbers using nested ternary"],
+                        qna: [{ q: "What is 5/2 in C?", a: "2, not 2.5. Integer division truncates the decimal. Use (float)5/2 or 5.0/2 to get 2.5." }, { q: "x++ vs ++x difference?", a: "x++ returns current value then increments. ++x increments first then returns the new value. Both end with x+1 but differ in what the expression evaluates to." }, { q: "What does % (modulus) do?", a: "Returns the remainder of division. 10%3=1. Used for even/odd check (n%2==0), extracting last digit (n%10), cycling through values." }]
+                    },
+                    {
+                        day: "Day 5", label: "Day 5", ls: "", topic: "Ch 2 — Operator precedence + constants", chap: "Ch 2.3, 2.6",
+                        theory: "Precedence determines evaluation order. #define vs const. Symbolic constants. Escape sequences.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;
+#define PI      3.14159   </span><span class="cm">// no type, no semicolon</span>
+<span class="kw">const int</span> PASS = <span class="num">35</span>;    <span class="cm">// typed, scoped — preferred</span>
+<span class="kw">const float</span> TAX = <span class="num">0.18f</span>;
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="cm">/* Precedence: * before + */</span>
+    <span class="kw">int</span> r = <span class="num">2</span> + <span class="num">3</span> * <span class="num">4</span>;    <span class="cm">// 14, not 20</span>
+    <span class="kw">int</span> s = (<span class="num">2</span>+<span class="num">3</span>) * <span class="num">4</span>;   <span class="cm">// 20 — parens override</span>
+    <span class="fn">printf</span>(<span class="str">"r=%d s=%d\\n"</span>, r, s);
+
+    <span class="kw">float</span> area = PI * <span class="num">5</span> * <span class="num">5</span>;
+    <span class="fn">printf</span>(<span class="str">"Circle area = %.2f\\n"</span>, area);
+
+    <span class="kw">float</span> price=<span class="num">500</span>, tax=price*TAX;
+    <span class="fn">printf</span>(<span class="str">"Total = %.2f\\n"</span>, price+tax);
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Evaluate 5+3*2-8/4 by hand, then verify with printf", "Define macros SQUARE(x) and CUBE(x) — test with inputs", "Unit converter: define constants for km-to-miles, kg-to-lbs conversion rates"],
+                        qna: [{ q: "#define vs const — which is better?", a: "const is preferred. It has a type (safer, debugger-visible, scoped). #define is text substitution — no type checking, no scope, can cause subtle bugs." }, { q: "Operator precedence order?", a: "Unary (++,--,!) > Multiplicative (*,/,%) > Additive (+,-) > Relational (>,<) > Equality (==,!=) > Logical (&&, ||) > Assignment (=,+=...)." }, { q: "Can const be changed?", a: "No — compiler gives error. That is the entire point of const. Use it for values that must stay fixed: PI, tax rates, array size limits." }]
+                    },
+                    {
+                        day: "Day 6", label: "Day 6", ls: "", topic: "Ch 2 — Scope and lifetime of variables", chap: "Ch 2.7",
+                        theory: "Local (block scope), global (file scope), static (persists between calls), register (CPU hint). Lifetime = how long variable exists in memory.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+
+<span class="kw">int</span> globalVar = <span class="num">100</span>;   <span class="cm">// global — lives entire program</span>
+
+<span class="kw">void</span> <span class="fn">demo</span>() {
+    <span class="kw">int</span>    local  = <span class="num">5</span>;    <span class="cm">// local — dies when demo() ends</span>
+    <span class="kw">static int</span> count = <span class="num">0</span>; <span class="cm">// initialized ONCE, persists</span>
+    count++;
+    <span class="fn">printf</span>(<span class="str">"count=%d local=%d\\n"</span>, count, local);
+}
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="fn">demo</span>();  <span class="cm">// count=1</span>
+    <span class="fn">demo</span>();  <span class="cm">// count=2  (persisted!)</span>
+    <span class="fn">demo</span>();  <span class="cm">// count=3</span>
+    <span class="cm">/* Block scope */</span>
+    { <span class="kw">int</span> temp=<span class="num">99</span>; <span class="fn">printf</span>(<span class="str">"temp=%d\\n"</span>,temp); }
+    <span class="cm">// temp is gone here — compile error if accessed</span>
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Static counter: call function 5 times, verify count grows each call", "Same variable name in outer and inner block — which one wins inside inner?", "Global vs local: same name globally and locally — observe which is used inside function"],
+                        qna: [{ q: "Local vs global — which is better?", a: "Local is preferred. Globals can be modified by any function — hard to debug. Use global only when data must truly be shared across many functions throughout the program." }, { q: "What does static do to a local variable?", a: "It persists between function calls — stored in data segment, not stack. Initialized only once on the first call. Like a global but scoped to that function." }, { q: "What is a garbage value?", a: "An uninitialized local variable contains whatever bytes were left in that memory location previously. Unpredictable — could be 0, -2147483648, or 32767. Always initialize." }]
+                    },
+                    {
+                        day: "Day 7", label: "Test Day", ls: "background:#FCEBEB;color:#A32D2D", topic: "Week 1 Mini Test", chap: "Ch 1–2 full",
+                        theory: "Write all programs from scratch without notes. Goal: ensure Ch 1–2 is solid before moving to control flow.",
+                        code: `<span class="cm">/* Week 1 Test — solve all 4 without notes:
+
+   1. Student report: take name, roll, marks in
+      3 subjects via scanf. Compute total and
+      percentage. Print formatted report.
+
+   2. Simple calculator: take 2 numbers and
+      an operator (+,-,*,/) as char. Print result.
+      Handle division by zero with a message.
+
+   3. Unit converter: take value and choice
+      (1=km to miles, 2=kg to lbs, 3=C to F).
+
+   4. Debug: find all 3 bugs in these lines:
+      int x; printf("%d", x);
+      float f = 7/2;
+      char c; scanf("%c", c);
+*/</span>`,
+                        tasks: ["Test 1: student report card with percentage calculation", "Test 2: operator calculator with division-by-zero guard", "Test 3: unit converter using named constants"],
+                        qna: [{ q: "How do I know I am ready for Week 2?", a: "If you can write scanf+printf programs for any task without looking at notes, you are ready. Format specifiers and & in scanf must be instinctive." }, { q: "Most common Week 1 bugs?", a: "Forgetting & in scanf. Mixing %d and %f. Integer division when float result expected. These three cause 80% of beginner errors." }, { q: "How long per test program?", a: "Aim 10–15 minutes. If a simple calculator takes 30+ minutes, spend one more day practicing before moving to Week 2." }]
+                    }
+                ]
+            },
+            2: {
+                badge: "Week 2 — Control Flow (Days 8–14)", bstyle: "background:#EEEDFE;color:#534AB7",
+                desc: "Ch 3 & 4: if/else, switch-case, expressions, all loop types, break, continue, GOTO.",
+                days: [
+                    {
+                        day: "Day 8", label: "Day 8", ls: "", topic: "Ch 3 — if, if-else, nested if", chap: "Ch 3.1–3.2",
+                        theory: "Condition evaluates to 0 (false) or non-zero (true). if-else if-else ladder for ranges. Nested if for compound checks.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> marks;
+    <span class="fn">scanf</span>(<span class="str">"%d"</span>, &amp;marks);
+
+    <span class="cm">/* if-else if ladder */</span>
+    <span class="kw">if</span>     (marks >= <span class="num">90</span>) <span class="fn">printf</span>(<span class="str">"A+\\n"</span>);
+    <span class="kw">else if</span>(marks >= <span class="num">80</span>) <span class="fn">printf</span>(<span class="str">"A\\n"</span>);
+    <span class="kw">else if</span>(marks >= <span class="num">60</span>) <span class="fn">printf</span>(<span class="str">"B\\n"</span>);
+    <span class="kw">else if</span>(marks >= <span class="num">35</span>) <span class="fn">printf</span>(<span class="str">"C\\n"</span>);
+    <span class="kw">else</span>                  <span class="fn">printf</span>(<span class="str">"F\\n"</span>);
+
+    <span class="cm">/* Nested if */</span>
+    <span class="kw">int</span> age; <span class="fn">scanf</span>(<span class="str">"%d"</span>, &amp;age);
+    <span class="kw">if</span>(age >= <span class="num">18</span>) {
+        <span class="kw">if</span>(age >= <span class="num">60</span>) <span class="fn">printf</span>(<span class="str">"Senior\\n"</span>);
+        <span class="kw">else</span>          <span class="fn">printf</span>(<span class="str">"Adult\\n"</span>);
+    } <span class="kw">else</span>           <span class="fn">printf</span>(<span class="str">"Minor\\n"</span>);
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Electricity bill: slabs — first 100 units @1.50, 101-200 @2.50, above @3.50", "Triangle type: 3 sides input, determine equilateral/isosceles/scalene", "Leap year: divisible by 4, except centuries unless by 400"],
+                        qna: [{ q: "Difference between = and == ?", a: "= assigns (a=5 stores 5 in a). == compares (a==5 checks if a equals 5). if(a=5) is always true — it assigns 5, which is non-zero. Classic bug." }, { q: "What if multiple else-if conditions are true?", a: "Only the FIRST matching one executes. The rest are skipped entirely. Always put the most specific or most restrictive condition first." }, { q: "Can if work without braces?", a: "Yes but only the next single statement belongs to it. Always use braces with multiple statements. Missing braces is a top-3 source of logic bugs." }]
+                    },
+                    {
+                        day: "Day 9", label: "Day 9", ls: "", topic: "Ch 3 — switch-case + expressions", chap: "Ch 3.3–3.5",
+                        theory: "switch for fixed integer/char choices. break prevents fall-through to next case. Arithmetic expression evaluation.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> ch;
+    <span class="fn">printf</span>(<span class="str">"1=Circle 2=Rect 3=Triangle: "</span>);
+    <span class="fn">scanf</span>(<span class="str">"%d"</span>, &amp;ch);
+
+    <span class="kw">switch</span>(ch) {
+        <span class="kw">case</span> <span class="num">1</span>: {
+            <span class="kw">float</span> r; <span class="fn">scanf</span>(<span class="str">"%f"</span>, &amp;r);
+            <span class="fn">printf</span>(<span class="str">"Area=%.2f\\n"</span>, <span class="num">3.14159f</span>*r*r);
+            <span class="kw">break</span>;   <span class="cm">// REQUIRED — prevents fall-through</span>
+        }
+        <span class="kw">case</span> <span class="num">2</span>: {
+            <span class="kw">float</span> l,w; <span class="fn">scanf</span>(<span class="str">"%f %f"</span>, &amp;l, &amp;w);
+            <span class="fn">printf</span>(<span class="str">"Area=%.2f\\n"</span>, l*w); <span class="kw">break</span>;
+        }
+        <span class="kw">default</span>: <span class="fn">printf</span>(<span class="str">"Invalid!\\n"</span>);
+    }
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Day-number to day-name: 1=Monday…7=Sunday", "Full calculator: two numbers + char operator (+,-,*,/) via switch", "Month name + days: use fall-through for months with 30 days"],
+                        qna: [{ q: "What happens if I forget break?", a: "Fall-through — execution continues into the next case automatically. Sometimes intentional for grouping, usually a nasty bug." }, { q: "Can switch work with strings?", a: "No. switch only works with int and char values. For string comparisons use if-else with strcmp()." }, { q: "switch vs if-else — when to use which?", a: "switch is faster and more readable for many exact integer/char values. if-else handles ranges (marks >= 80), complex conditions, and float/string comparisons." }]
+                    },
+                    {
+                        day: "Day 10", label: "Day 10", ls: "", topic: "Ch 3 — GOTO + Ch 4 — while loop", chap: "Ch 3.6, Ch 4.1–4.3",
+                        theory: "goto jumps to a label — avoid in real code. while is pre-test loop — condition checked before each iteration.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="cm">/* while loop */</span>
+    <span class="kw">int</span> i=<span class="num">1</span>;
+    <span class="kw">while</span>(i <= <span class="num">10</span>) {
+        <span class="fn">printf</span>(<span class="str">"%d "</span>, i);
+        i++;    <span class="cm">// UPDATE — forgetting this = infinite loop</span>
+    }
+
+    <span class="cm">/* while for input validation */</span>
+    <span class="kw">int</span> num;
+    <span class="fn">printf</span>(<span class="str">"\\nEnter positive number: "</span>);
+    <span class="fn">scanf</span>(<span class="str">"%d"</span>, &amp;num);
+    <span class="kw">while</span>(num <= <span class="num">0</span>) {
+        <span class="fn">printf</span>(<span class="str">"Invalid. Try again: "</span>);
+        <span class="fn">scanf</span>(<span class="str">"%d"</span>, &amp;num);
+    }
+    <span class="fn">printf</span>(<span class="str">"Valid: %d\\n"</span>, num);
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Sum of digits of a number (1234 → 10)", "Reverse a number (1234 → 4321)", "Count digits in a number without using strings"],
+                        qna: [{ q: "What causes an infinite loop?", a: "Condition never becomes false — usually because you forgot to update the loop variable (i++). Press Ctrl+C to stop a running infinite loop." }, { q: "When to use while vs for?", a: "while: unknown iterations in advance (user keeps entering until valid). for: known count (1 to N). Both can do either — use whichever reads more naturally." }, { q: "Should I use goto?", a: "Avoid it. goto creates spaghetti code — jumps make logic hard to follow and debug. Use break, continue, return, or restructure logic instead." }]
+                    },
+                    {
+                        day: "Day 11", label: "Day 11", ls: "", topic: "Ch 4 — for loop + nested loops + patterns", chap: "Ch 4.2",
+                        theory: "for: init; condition; update in one line. Best for counted iterations. Nested for for 2D patterns and matrices.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> i, j, n=<span class="num">5</span>;
+
+    <span class="cm">/* for loop — 5 times table */</span>
+    <span class="kw">for</span>(i=<span class="num">1</span>; i<=<span class="num">10</span>; i++)
+        <span class="fn">printf</span>(<span class="str">"%2d "</span>, i*<span class="num">5</span>);
+
+    <span class="fn">printf</span>(<span class="str">"\\n"</span>);
+
+    <span class="cm">/* Nested for — right triangle pattern */</span>
+    <span class="kw">for</span>(i=<span class="num">1</span>; i<=n; i++) {
+        <span class="kw">for</span>(j=<span class="num">1</span>; j<=i; j++)
+            <span class="fn">printf</span>(<span class="str">"* "</span>);
+        <span class="fn">printf</span>(<span class="str">"\\n"</span>);
+    }
+    <span class="cm">/* Output:
+       *
+       * *
+       * * *
+       * * * *
+       * * * * *  */</span>
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Multiplication tables for 2 through 10 using nested for", "Floyd's triangle: print 1, 2 3, 4 5 6, 7 8 9 10", "Sum of series: 1 + 1/2 + 1/3 + ... + 1/N"],
+                        qna: [{ q: "Can for loop count downward?", a: "Yes: for(i=10; i>=1; i--) counts from 10 to 1. Update can be any expression: i+=2 for even numbers, i*=2 for doubling." }, { q: "What is a nested loop?", a: "A loop inside another. Outer = rows, inner = columns. Inner loop runs completely for each outer iteration. Time complexity multiplies: O(n) × O(n) = O(n²)." }, { q: "What does for(;;) mean?", a: "All three parts empty — infinite loop. Identical to while(1). Use with a break inside to exit when a condition is met." }]
+                    },
+                    {
+                        day: "Day 12", label: "Day 12", ls: "", topic: "Ch 4 — do-while + break + continue", chap: "Ch 4.4–4.6",
+                        theory: "do-while: post-test loop — always runs at least once. Used for menus. break exits loop. continue skips current iteration.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> choice;
+
+    <span class="cm">/* do-while — menu that runs at least once */</span>
+    <span class="kw">do</span> {
+        <span class="fn">printf</span>(<span class="str">"\\n1.Add 2.Sub 0.Exit: "</span>);
+        <span class="fn">scanf</span>(<span class="str">"%d"</span>, &amp;choice);
+        <span class="kw">if</span>(choice==<span class="num">1</span>) <span class="fn">printf</span>(<span class="str">"Adding!\\n"</span>);
+        <span class="kw">if</span>(choice==<span class="num">2</span>) <span class="fn">printf</span>(<span class="str">"Subtracting!\\n"</span>);
+    } <span class="kw">while</span>(choice != <span class="num">0</span>);
+
+    <span class="cm">/* break and continue */</span>
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">1</span>; i<=<span class="num">10</span>; i++) {
+        <span class="kw">if</span>(i==<span class="num">5</span>) <span class="kw">continue</span>;  <span class="cm">// skip 5</span>
+        <span class="kw">if</span>(i==<span class="num">8</span>) <span class="kw">break</span>;     <span class="cm">// stop at 8</span>
+        <span class="fn">printf</span>(<span class="str">"%d "</span>, i);    <span class="cm">// 1 2 3 4 6 7</span>
+    }
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["ATM simulation: menu with deposit, withdraw, balance — loop until Exit", "Print 1–50 skipping multiples of both 3 and 5 using continue", "Number guessing: loop until correct, count attempts"],
+                        qna: [{ q: "Difference between while and do-while?", a: "while checks condition BEFORE first run — may execute 0 times. do-while always executes at least ONCE then checks — guaranteed one run." }, { q: "Does continue work inside switch?", a: "No — continue only works in loops. Inside a switch that is inside a loop, continue skips to the next loop iteration (bypasses the switch)." }, { q: "Can break exit nested loops?", a: "break only exits the innermost loop. To exit multiple levels, use a flag variable or restructure with a function and return." }]
+                    },
+                    {
+                        day: "Day 13", label: "Day 13", ls: "", topic: "Ch 4 — Jumping in loop + combined practice", chap: "Ch 4.5 revision",
+                        theory: "Combine all loop types with real programs. Fibonacci, prime numbers, patterns using nested loops.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="cm">/* Fibonacci series */</span>
+    <span class="kw">int</span> a=<span class="num">0</span>, b=<span class="num">1</span>, temp, n=<span class="num">10</span>;
+    <span class="fn">printf</span>(<span class="str">"Fibonacci: "</span>);
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>; i&lt;n; i++) {
+        <span class="fn">printf</span>(<span class="str">"%d "</span>, a);
+        temp=a+b; a=b; b=temp;
+    }   <span class="cm">// 0 1 1 2 3 5 8 13 21 34</span>
+
+    <span class="cm">/* Prime check with break */</span>
+    <span class="kw">int</span> num=<span class="num">17</span>, prime=<span class="num">1</span>;
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">2</span>; i*i<=num; i++)
+        <span class="kw">if</span>(num%i==<span class="num">0</span>){ prime=<span class="num">0</span>; <span class="kw">break</span>; }
+    <span class="fn">printf</span>(<span class="str">"\\n%d is %s\\n"</span>, num, prime?<span class="str">"prime"</span>:<span class="str">"not prime"</span>);
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Print all prime numbers from 2 to 100", "Pascal's triangle for N rows", "Armstrong checker: 153=1³+5³+3³, check any 3-digit number"],
+                        qna: [{ q: "How to print Fibonacci correctly?", a: "Two variables a=0, b=1. Each iteration: print a, compute next=a+b, then a=b, b=next. Repeat N times." }, { q: "Why check up to sqrt(n) for prime?", a: "If n has a factor greater than sqrt(n), it must have a corresponding factor less than sqrt(n). So checking up to sqrt(n) is sufficient and twice as fast." }, { q: "What is an Armstrong number?", a: "Sum of each digit raised to the power of total digit count equals the number. 153 = 1³+5³+3³. Extract digits with %10 and /10." }]
+                    },
+                    {
+                        day: "Day 14", label: "Test Day", ls: "background:#FCEBEB;color:#A32D2D", topic: "Week 2 Mini Test", chap: "Ch 3–4 full",
+                        theory: "Combine Week 1 + Week 2. Programs that take input, make decisions, and repeat.",
+                        code: `<span class="cm">/* Week 2 Test Problems:
+
+   1. Number guessing game:
+      Secret = 42. User guesses, print
+      "too high" / "too low". Count attempts.
+
+   2. ATM simulation:
+      Balance = 10000. Menu: deposit,
+      withdraw, check balance, exit.
+      Use do-while + switch.
+
+   3. Number properties of input N:
+      Is it prime? Is it perfect?
+      Is it Armstrong? Print digit sum.
+
+   4. Diamond pattern of stars for N rows.
+*/</span>`,
+                        tasks: ["Number guessing game with attempt counter and final message", "ATM with do-while + switch + overdraft protection", "All properties of a number: prime, perfect, Armstrong"],
+                        qna: [{ q: "What is a perfect number?", a: "Equal to sum of its proper divisors. 6=1+2+3, 28=1+2+4+7+14. Loop from 1 to n/2, sum divisors, compare to n." }, { q: "How to combine switch + do-while?", a: "do-while wraps the entire menu. switch handles each choice. while condition checks for exit choice (0). This is the standard C menu pattern." }, { q: "How do I debug my loop if output is wrong?", a: "Add printf inside the loop to print the loop variable and key values each iteration. Verify the first iteration, last iteration, and count match expectations." }]
+                    }
+                ]
+            },
+            3: {
+                badge: "Week 3 — Arrays, Strings & Functions (Days 15–21)", bstyle: "background:#FAEEDA;color:#854F0B",
+                desc: "Ch 5, 6, 7: 1D/2D arrays, dynamic arrays, strings, user-defined functions, recursion, pointers.",
+                days: [
+                    {
+                        day: "Day 15", label: "Day 15", ls: "", topic: "Ch 5 — 1D Arrays", chap: "Ch 5.1–5.2",
+                        theory: "Array = contiguous same-type elements. Fixed size. Index starts at 0. Access with arr[i]. Traverse with for loop.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> marks[<span class="num">5</span>] = {<span class="num">85</span>,<span class="num">90</span>,<span class="num">78</span>,<span class="num">92</span>,<span class="num">88</span>};
+    <span class="kw">int</span> sum=<span class="num">0</span>, max=marks[<span class="num">0</span>], min=marks[<span class="num">0</span>];
+
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>; i&lt;<span class="num">5</span>; i++) {
+        sum += marks[i];
+        <span class="kw">if</span>(marks[i] > max) max = marks[i];
+        <span class="kw">if</span>(marks[i] < min) min = marks[i];
+    }
+    <span class="fn">printf</span>(<span class="str">"Sum=%d Avg=%.1f Max=%d Min=%d\\n"</span>,
+           sum, (<span class="kw">float</span>)sum/<span class="num">5</span>, max, min);
+
+    <span class="cm">/* Reverse in-place using two pointers */</span>
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>,j=<span class="num">4</span>; i&lt;j; i++,j--){
+        <span class="kw">int</span> t=marks[i]; marks[i]=marks[j]; marks[j]=t;
+    }
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Take N numbers, find sum, average, max, min, and range", "Reverse array in place without using an extra array", "Count how many elements are above the average"],
+                        qna: [{ q: "What is array index out of bounds?", a: "Accessing marks[5] when size is 5. Valid indices are 0–4. C doesn't check bounds — you silently get garbage or crash. Always loop 0 to size-1." }, { q: "Can array size be a variable in C?", a: "In C99+ yes (Variable Length Arrays). For portability use #define MAX 100 and declare int arr[MAX] — works on all compilers." }, { q: "How is array stored in memory?", a: "Contiguously — each element is adjacent. marks[0] at base address, marks[1] at base+4 (for int), etc. That's why index acts as a memory offset." }]
+                    },
+                    {
+                        day: "Day 16", label: "Day 16", ls: "", topic: "Ch 5 — 2D + Multidimensional Arrays", chap: "Ch 5.3–5.4",
+                        theory: "2D array = rows × columns. Declare as arr[rows][cols]. Nested loops for traversal. Matrix operations.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> a[<span class="num">3</span>][<span class="num">3</span>], b[<span class="num">3</span>][<span class="num">3</span>], c[<span class="num">3</span>][<span class="num">3</span>];
+
+    <span class="cm">/* Input both matrices */</span>
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>;i&lt;<span class="num">3</span>;i++)
+        <span class="kw">for</span>(<span class="kw">int</span> j=<span class="num">0</span>;j&lt;<span class="num">3</span>;j++)
+            <span class="fn">scanf</span>(<span class="str">"%d"</span>, &amp;a[i][j]);
+
+    <span class="cm">/* Matrix addition */</span>
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>;i&lt;<span class="num">3</span>;i++)
+        <span class="kw">for</span>(<span class="kw">int</span> j=<span class="num">0</span>;j&lt;<span class="num">3</span>;j++)
+            c[i][j] = a[i][j] + b[i][j];
+
+    <span class="cm">/* Transpose: swap above-diagonal only */</span>
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>;i&lt;<span class="num">3</span>;i++)
+        <span class="kw">for</span>(<span class="kw">int</span> j=i+<span class="num">1</span>;j&lt;<span class="num">3</span>;j++){
+            <span class="kw">int</span> t=a[i][j]; a[i][j]=a[j][i]; a[j][i]=t;
+        }
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Matrix multiplication of two 3×3 matrices", "Find diagonal elements sum of a square matrix", "Check if a matrix is symmetric: a[i][j] == a[j][i]"],
+                        qna: [{ q: "How is 2D array stored in memory?", a: "Row by row (row-major order): a[0][0], a[0][1], a[0][2], then a[1][0]... All in one flat contiguous block of memory." }, { q: "How to pass 2D array to function?", a: "You must specify the column count: void display(int mat[][3], int rows). Compiler needs column count to calculate row offsets in memory." }, { q: "What is matrix transpose?", a: "Swap rows and columns: transposed[j][i] = original[i][j]. Do it in-place by only swapping elements above the diagonal (j > i) to avoid double-swapping." }]
+                    },
+                    {
+                        day: "Day 17", label: "Day 17", ls: "", topic: "Ch 5 — Dynamic Arrays + Strings", chap: "Ch 5.5–5.7",
+                        theory: "Dynamic arrays via malloc — size decided at runtime. Strings = char arrays ending with \\0. string.h: strlen, strcpy, strcat, strcmp.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="cm">/* Dynamic array */</span>
+    <span class="kw">int</span> n; <span class="fn">scanf</span>(<span class="str">"%d"</span>, &amp;n);
+    <span class="kw">int</span>* arr = (<span class="kw">int</span>*)<span class="fn">malloc</span>(n * <span class="kw">sizeof</span>(<span class="kw">int</span>));
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>; i&lt;n; i++) <span class="fn">scanf</span>(<span class="str">"%d"</span>, &amp;arr[i]);
+    <span class="fn">free</span>(arr);  <span class="cm">// ALWAYS free</span>
+
+    <span class="cm">/* String operations */</span>
+    <span class="kw">char</span> s1[<span class="num">20</span>]=<span class="str">"Hello"</span>, s2[<span class="num">20</span>]=<span class="str">"World"</span>, s3[<span class="num">40</span>];
+    <span class="fn">printf</span>(<span class="str">"len=%lu\\n"</span>, <span class="fn">strlen</span>(s1));  <span class="cm">// 5</span>
+    <span class="fn">strcpy</span>(s3, s1);   <span class="cm">// copy s1 to s3</span>
+    <span class="fn">strcat</span>(s3, s2);   <span class="cm">// s3 = "HelloWorld"</span>
+    <span class="fn">printf</span>(<span class="str">"%d\\n"</span>, <span class="fn">strcmp</span>(s1,s2)); <span class="cm">// neg (H &lt; W)</span>
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Count vowels, consonants, and digits in a string", "Check if string is palindrome without library functions", "Reverse a string in place manually"],
+                        qna: [{ q: "Why no & for string in scanf?", a: "The array name is already an address — it points to the first character. Writing &name would give address of the array pointer itself, which is wrong." }, { q: "How to read a string with spaces?", a: "scanf(\"%s\") stops at whitespace. Use fgets(str, size, stdin) to read the entire line including spaces. After scanf, call cin.ignore() before fgets." }, { q: "What is the null terminator \\0?", a: "Marks the end of string. strlen counts characters BEFORE \\0. Always allocate one extra byte: \"Hello\" needs char[6] for 5 chars + \\0." }]
+                    },
+                    {
+                        day: "Day 18", label: "Day 18", ls: "", topic: "Ch 6 — Functions: definition, prototype, call", chap: "Ch 6.1–6.3",
+                        theory: "Functions eliminate repetition. Prototype declares signature. Definition implements. Return sends value back to caller.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+
+<span class="cm">/* Prototypes — declared before main */</span>
+<span class="kw">int</span>   <span class="fn">add</span>(<span class="kw">int</span>, <span class="kw">int</span>);
+<span class="kw">float</span> <span class="fn">average</span>(<span class="kw">int</span>[], <span class="kw">int</span>);
+<span class="kw">void</span>  <span class="fn">printLine</span>(<span class="kw">int</span>);
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="fn">printf</span>(<span class="str">"%d\\n"</span>, <span class="fn">add</span>(<span class="num">5</span>,<span class="num">3</span>));     <span class="cm">// 8</span>
+    <span class="kw">int</span> a[]={<span class="num">10</span>,<span class="num">20</span>,<span class="num">30</span>};
+    <span class="fn">printf</span>(<span class="str">"%.1f\\n"</span>,<span class="fn">average</span>(a,<span class="num">3</span>)); <span class="cm">// 20.0</span>
+    <span class="fn">printLine</span>(<span class="num">20</span>);
+    <span class="kw">return</span> <span class="num">0</span>;
+}
+<span class="kw">int</span>   <span class="fn">add</span>(<span class="kw">int</span> a,<span class="kw">int</span> b){ <span class="kw">return</span> a+b; }
+<span class="kw">float</span> <span class="fn">average</span>(<span class="kw">int</span> arr[],<span class="kw">int</span> n){
+    <span class="kw">int</span> s=<span class="num">0</span>;
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>;i&lt;n;i++) s+=arr[i];
+    <span class="kw">return</span> (<span class="kw">float</span>)s/n;
+}
+<span class="kw">void</span> <span class="fn">printLine</span>(<span class="kw">int</span> n){
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>;i&lt;n;i++) <span class="fn">printf</span>(<span class="str">"-"</span>);
+    <span class="fn">printf</span>(<span class="str">"\\n"</span>);
+}`,
+                        tasks: ["Write functions: isPrime(n), factorial(n), power(base,exp)", "Bubble sort function that takes array pointer and size", "Calculator with separate add(), subtract(), multiply(), divide() functions"],
+                        qna: [{ q: "What is call by value?", a: "C copies the argument into the parameter. Changing the parameter inside the function does NOT affect the original variable. 99% of function calls work this way." }, { q: "Why prototype before main?", a: "Compiler reads top to bottom. Without prototype, calling a function before its definition triggers 'implicit declaration' error or wrong behavior." }, { q: "What does void return type mean?", a: "The function returns nothing. Use when you only need to perform an action (print, sort an array in place) without sending any result back." }]
+                    },
+                    {
+                        day: "Day 19", label: "Day 19", ls: "", topic: "Ch 6 — Recursion + parameter passing types", chap: "Ch 6.2, 6.4",
+                        theory: "Recursion: function calls itself. Must have base case (stopping condition). Call by value vs call by reference (pointer).",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+
+<span class="cm">/* Recursion — factorial */</span>
+<span class="kw">int</span> <span class="fn">fact</span>(<span class="kw">int</span> n) {
+    <span class="kw">if</span>(n==<span class="num">0</span>) <span class="kw">return</span> <span class="num">1</span>;   <span class="cm">// base case — stops recursion</span>
+    <span class="kw">return</span> n * <span class="fn">fact</span>(n-<span class="num">1</span>); <span class="cm">// recursive call</span>
+}
+
+<span class="cm">/* Call by reference via pointer */</span>
+<span class="kw">void</span> <span class="fn">swap</span>(<span class="kw">int</span>* a, <span class="kw">int</span>* b) {
+    <span class="kw">int</span> t=*a; *a=*b; *b=t;
+}
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="fn">printf</span>(<span class="str">"5! = %d\\n"</span>, <span class="fn">fact</span>(<span class="num">5</span>)); <span class="cm">// 120</span>
+    <span class="kw">int</span> x=<span class="num">10</span>, y=<span class="num">20</span>;
+    <span class="fn">swap</span>(&amp;x, &amp;y);
+    <span class="fn">printf</span>(<span class="str">"x=%d y=%d\\n"</span>, x, y); <span class="cm">// x=20 y=10</span>
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Fibonacci using recursion (compare output with loop version)", "Recursive binary search in sorted array", "Tower of Hanoi for N discs — trace moves"],
+                        qna: [{ q: "What is the base case?", a: "The condition that stops recursion. Without it the function calls itself forever — stack overflows and program crashes. Always define base case first." }, { q: "Recursion vs loop — which is better?", a: "Loops are faster and use less memory. Recursion is more readable for naturally recursive problems like trees and factorials. For simple counting always use loops." }, { q: "What is a stack overflow from recursion?", a: "Each call uses stack memory. fact(100000) would push 100000 stack frames — stack fills up and crashes. Use loops for large N." }]
+                    },
+                    {
+                        day: "Day 20", label: "Day 20", ls: "", topic: "Ch 7 — Pointers: basics, arithmetic, arrays", chap: "Ch 7.1–7.4",
+                        theory: "Pointer stores memory address. * dereferences (gets value at address). & gets address. Array name = pointer to first element.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span>  a   = <span class="num">10</span>;
+    <span class="kw">int</span>* ptr = &amp;a;   <span class="cm">// ptr holds address of a</span>
+
+    <span class="fn">printf</span>(<span class="str">"Value:   %d\\n"</span>,  *ptr);  <span class="cm">// 10</span>
+    <span class="fn">printf</span>(<span class="str">"Address: %p\\n"</span>,  ptr);
+    *ptr = <span class="num">20</span>;                       <span class="cm">// changes a to 20!</span>
+    <span class="fn">printf</span>(<span class="str">"a is now: %d\\n"</span>, a);    <span class="cm">// 20</span>
+
+    <span class="cm">/* Array traversal via pointer */</span>
+    <span class="kw">int</span> arr[<span class="num">5</span>]={<span class="num">10</span>,<span class="num">20</span>,<span class="num">30</span>,<span class="num">40</span>,<span class="num">50</span>};
+    <span class="kw">int</span>* p = arr;   <span class="cm">// same as &arr[0]</span>
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>;i&lt;<span class="num">5</span>;i++)
+        <span class="fn">printf</span>(<span class="str">"%d "</span>, *(p+i));  <span class="cm">// same as arr[i]</span>
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Swap two numbers using pointers — verify call by reference works", "Find maximum in array using pointer traversal only (no index)", "Write function that reverses array via pointer parameter"],
+                        qna: [{ q: "What is * in declaration vs in expression?", a: "int *ptr — declares a pointer variable (stores address). *ptr later — dereferences it (gets or sets value at that address). Same symbol, two completely different meanings." }, { q: "What is a null pointer?", a: "int *p = NULL — points to nothing. Dereferencing NULL causes a segfault crash. Always initialize pointers before use." }, { q: "arr[i] vs *(arr+i) — are they the same?", a: "Yes, identical. arr[i] is compiler shorthand for *(arr+i). The compiler converts both to the exact same machine instruction." }]
+                    },
+                    {
+                        day: "Day 21", label: "Test Day", ls: "background:#FCEBEB;color:#A32D2D", topic: "Week 3 Mini Test + Ch 7 — Pointers & functions", chap: "Ch 5–7 full",
+                        theory: "Pointers to functions. Combined test: arrays + functions + strings + pointers all together.",
+                        code: `<span class="cm">/* Week 3 Test Problems:
+
+   1. Bubble sort using function that
+      takes array pointer and size.
+      Sort in ascending and descending.
+
+   2. String operations without string.h:
+      Implement your own strlen, strcpy, strrev.
+
+   3. Matrix multiplication using a function
+      that takes three 2D arrays.
+
+   4. Function returning pointer to max
+      element in array.
+*/</span>`,
+                        tasks: ["Bubble sort function with pointer to array", "Implement strlen, strcpy, strrev from scratch without string.h", "Binary search returning index or -1 if not found"],
+                        qna: [{ q: "How to pass an array to a function?", a: "Array name decays to pointer. void sort(int* arr, int n) and void sort(int arr[], int n) are identical. Changes inside function affect the original array." }, { q: "What is a function pointer?", a: "A pointer that stores the address of a function: int (*fp)(int,int) = add; fp(3,4) calls add(3,4). Used for callbacks and dispatch tables." }, { q: "How to return an array from a function?", a: "Cannot return local array — it's destroyed when function returns. Options: pass result array as parameter, allocate with malloc and return pointer (caller must free)." }]
+                    }
+                ]
+            },
+            4: {
+                badge: "Week 4 — Structs to C++ (Days 22–28)", bstyle: "background:#FAECE7;color:#993C1D",
+                desc: "Ch 8–11 finish C (structs, files, memory, preprocessor) then Ch 12–16 begin C++ (OOP, classes, constructors).",
+                days: [
+                    {
+                        day: "Day 22", label: "Day 22", ls: "", topic: "Ch 8 — Structures + unions + typedef", chap: "Ch 8.1–8.6",
+                        theory: "struct groups different types under one name. Nested struct. Union shares memory among members. typedef creates type aliases.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;</span>
+
+<span class="kw">typedef struct</span> {
+    <span class="kw">int</span>   roll;
+    <span class="kw">char</span>  name[<span class="num">20</span>];
+    <span class="kw">float</span> marks[<span class="num">3</span>];
+} Student;              <span class="cm">// typedef — write Student not struct Student</span>
+
+<span class="kw">float</span> <span class="fn">avg</span>(Student s) {
+    <span class="kw">return</span> (s.marks[<span class="num">0</span>]+s.marks[<span class="num">1</span>]+s.marks[<span class="num">2</span>])/<span class="num">3</span>;
+}
+<span class="kw">int</span> <span class="fn">main</span>() {
+    Student s1 = {<span class="num">101</span>, <span class="str">"Nitin"</span>, {<span class="num">88</span>,<span class="num">92</span>,<span class="num">79</span>}};
+    <span class="fn">printf</span>(<span class="str">"%s avg=%.1f\\n"</span>, s1.name, <span class="fn">avg</span>(s1));
+
+    Student batch[<span class="num">3</span>];  <span class="cm">// array of structs</span>
+
+    <span class="cm">/* union — all members share same memory */</span>
+    <span class="kw">union</span> Data { <span class="kw">int</span> i; <span class="kw">float</span> f; <span class="kw">char</span> c; };
+    <span class="cm">// sizeof(union Data) = 4 (size of largest member)</span>
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Array of 5 Student structs — input and find topper", "Nested struct: Employee has Address struct inside (city, pincode)", "Show union memory sharing: print address of i, f, c — all same address"],
+                        qna: [{ q: "Struct vs array — key difference?", a: "Array stores same type. struct stores different types together. A Student record needs int+char+float — only struct can hold all three." }, { q: "What is the -> operator?", a: "Accesses struct member via pointer. Student *p = &s1; then p->roll is same as (*p).roll. Arrow notation is standard and cleaner." }, { q: "Union vs struct memory size?", a: "struct size = sum of all member sizes (plus padding). union size = size of the LARGEST member only. Union saves memory when only one field is active at a time." }]
+                    },
+                    {
+                        day: "Day 23", label: "Day 23", ls: "", topic: "Ch 9 — File handling + Ch 10 — Dynamic memory", chap: "Ch 9, Ch 10",
+                        theory: "FILE pointer. fopen/fclose/fprintf/fscanf/fseek. Random access to file records. malloc/calloc/free for heap memory.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="cm">/* Write to file */</span>
+    <span class="kw">FILE</span>* fp = <span class="fn">fopen</span>(<span class="str">"data.txt"</span>,<span class="str">"w"</span>);
+    <span class="kw">if</span>(!fp){ <span class="fn">printf</span>(<span class="str">"Cannot open!\\n"</span>); <span class="kw">return</span> <span class="num">1</span>; }
+    <span class="fn">fprintf</span>(fp, <span class="str">"Nitin 20 88.5\\n"</span>);
+    <span class="fn">fclose</span>(fp);  <span class="cm">// always close</span>
+
+    <span class="cm">/* Random access — jump to record 3 */</span>
+    fp = <span class="fn">fopen</span>(<span class="str">"bin.dat"</span>,<span class="str">"rb"</span>);
+    <span class="fn">fseek</span>(fp, <span class="num">2</span>*<span class="kw">sizeof</span>(Student), SEEK_SET);
+    <span class="fn">fclose</span>(fp);
+
+    <span class="cm">/* Dynamic array */</span>
+    <span class="kw">int</span> n=<span class="num">5</span>;
+    <span class="kw">int</span>* arr=(<span class="kw">int</span>*)<span class="fn">malloc</span>(n*<span class="kw">sizeof</span>(<span class="kw">int</span>));
+    <span class="fn">free</span>(arr);
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Write student structs to file, reload and display on next run", "fseek: read only the 3rd record from a binary student file", "Dynamic struct array: N students via malloc, sort by marks, free"],
+                        qna: [{ q: "fwrite vs fprintf — which to use?", a: "fprintf writes formatted text (readable in notepad). fwrite writes raw binary bytes (compact, fast). Use fwrite+fread for struct files, fprintf for human-readable output." }, { q: "What does fseek(fp, 2*sizeof(s), SEEK_SET) do?", a: "Moves file pointer to byte offset 2×sizeof(s) from the beginning. This skips 2 records so the next fread reads record 3." }, { q: "malloc vs calloc?", a: "malloc(n*size) allocates memory with garbage values. calloc(n, size) allocates and zero-initializes everything. calloc is safer for arrays you'll fill incrementally." }]
+                    },
+                    {
+                        day: "Day 24", label: "Day 24", ls: "", topic: "Ch 11 — Storage classes + Preprocessor", chap: "Ch 11",
+                        theory: "auto, static, extern, register storage classes. Preprocessor: #define, #include, #ifdef/#endif. Macros with arguments.",
+                        code: `<span class="pp">#include &lt;stdio.h&gt;
+
+#define SQUARE(x)  ((x)*(x))     </span><span class="cm">// parens are CRITICAL</span>
+<span class="pp">#define MAX(a,b)   ((a)>(b)?(a):(b))
+#define PI         3.14159
+
+#ifdef DEBUG
+  #define LOG(x)   printf("DBG: %d\\n", x)
+#else
+  #define LOG(x)                        </span><span class="cm">// empty in release</span>
+<span class="pp">#endif</span>
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="fn">printf</span>(<span class="str">"%d\\n"</span>,   <span class="fn">SQUARE</span>(<span class="num">5</span>));    <span class="cm">// 25</span>
+    <span class="fn">printf</span>(<span class="str">"%d\\n"</span>,   <span class="fn">MAX</span>(<span class="num">10</span>,<span class="num">20</span>));  <span class="cm">// 20</span>
+    <span class="fn">printf</span>(<span class="str">"%.5f\\n"</span>, PI);            <span class="cm">// 3.14159</span>
+    <span class="fn">LOG</span>(<span class="num">42</span>);  <span class="cm">// prints only if -DDEBUG compile flag used</span>
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Write macros: AREA_CIRCLE(r), CELSIUS_TO_F(c), ABS(x)", "Demonstrate static variable — call function 5 times, verify count grows", "Use #ifdef to toggle between metric and imperial output units"],
+                        qna: [{ q: "Why extra parentheses in SQUARE(x)?", a: "SQUARE(1+2) without parens = 1+2*1+2=5 (wrong!). With ((x)*(x)) = ((1+2)*(1+2))=9 (correct). Always wrap macro arguments AND the whole expression in parens." }, { q: "What does extern do?", a: "Declares a variable that is defined in another source file. extern int count; tells the compiler 'count exists somewhere else, use it here'. Used in multi-file programs." }, { q: "What is conditional compilation?", a: "#ifdef DEBUG ... #endif — code inside only compiles when DEBUG macro is defined. Used to include debug logs in debug builds and exclude them in release builds." }]
+                    },
+                    {
+                        day: "Day 25", label: "Day 25", ls: "", topic: "Ch 12 — OOP intro + C++ structure + cin/cout", chap: "Ch 12–13",
+                        theory: "4 pillars of OOP: Encapsulation, Abstraction, Inheritance, Polymorphism. C++ uses cin/cout. References. new/delete.",
+                        code: `<span class="pp">#include &lt;iostream&gt;</span>
+<span class="kw">using namespace</span> std;
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> a, b;
+    cout &lt;&lt; <span class="str">"Enter two numbers: "</span>;
+    cin  &gt;&gt; a &gt;&gt; b;
+    cout &lt;&lt; <span class="str">"Sum = "</span> &lt;&lt; a+b &lt;&lt; endl;
+
+    <span class="cm">// C++ reference — alias, no null, no reassignment</span>
+    <span class="kw">int</span>&amp; ref = a;
+    ref = <span class="num">100</span>;    <span class="cm">// a is now 100!</span>
+
+    <span class="cm">// new/delete replaces malloc/free</span>
+    <span class="kw">int</span>* p = <span class="kw">new int</span>(<span class="num">42</span>);   <span class="cm">// heap, calls constructor</span>
+    cout &lt;&lt; *p &lt;&lt; endl;
+    <span class="kw">delete</span> p;              <span class="cm">// calls destructor + frees</span>
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Rewrite your C calculator completely in C++ using cin/cout", "Swap function using references — no pointers needed", "new/delete: allocate array of 5 ints, fill, print, delete[]"],
+                        qna: [{ q: "4 pillars of OOP?", a: "Encapsulation: data+functions together, data hidden. Abstraction: hide complexity, show interface. Inheritance: reuse code via parent-child. Polymorphism: one interface, many behaviors." }, { q: "cin vs scanf?", a: "cin is type-safe, no format specifiers, works with any type. scanf uses format strings and & — more error-prone. Always use cin in C++." }, { q: "Reference vs pointer?", a: "Reference must be initialized, cannot be null, cannot be reassigned. No * needed for access. Pointer can be null, reassigned, does arithmetic. References are cleaner for function parameters." }]
+                    },
+                    {
+                        day: "Day 26", label: "Day 26", ls: "", topic: "Ch 14 — Classes & Objects + Ch 16 — Constructors", chap: "Ch 14, Ch 16",
+                        theory: "class = data + methods. private/public/protected. Constructor auto-called on creation. Destructor on destruction. Initializer list.",
+                        code: `<span class="pp">#include &lt;iostream&gt;</span>
+<span class="kw">using namespace</span> std;
+
+<span class="kw">class</span> BankAccount {
+<span class="kw">private</span>:
+    string owner;
+    <span class="kw">double</span> balance;
+<span class="kw">public</span>:
+    <span class="cm">// Constructor with initializer list</span>
+    <span class="fn">BankAccount</span>(string n, <span class="kw">double</span> b)
+        : owner(n), balance(b) {
+        cout &lt;&lt; <span class="str">"Account created: "</span> &lt;&lt; owner &lt;&lt; endl;
+    }
+    ~<span class="fn">BankAccount</span>() { cout &lt;&lt; <span class="str">"Account closed\\n"</span>; }
+
+    <span class="kw">void</span> <span class="fn">deposit</span>(<span class="kw">double</span> amt) { balance += amt; }
+    <span class="kw">bool</span> <span class="fn">withdraw</span>(<span class="kw">double</span> amt) {
+        <span class="kw">if</span>(amt > balance){ cout&lt;&lt;<span class="str">"Insufficient!\\n"</span>; <span class="kw">return false</span>; }
+        balance -= amt; <span class="kw">return true</span>;
+    }
+    <span class="kw">void</span> <span class="fn">display</span>() { cout&lt;&lt;owner&lt;&lt;<span class="str">": Rs."</span>&lt;&lt;balance&lt;&lt;endl; }
+};
+<span class="kw">int</span> <span class="fn">main</span>() {
+    BankAccount acc(<span class="str">"Nitin"</span>, <span class="num">5000</span>);
+    acc.<span class="fn">deposit</span>(<span class="num">1000</span>);
+    acc.<span class="fn">withdraw</span>(<span class="num">2000</span>);
+    acc.<span class="fn">display</span>();
+}`,
+                        tasks: ["Class Student: private roll/name/marks, public input()/display()/avg()/grade()", "Class Circle with constructor — methods area(), circumference(), display()", "Copy constructor demo: Student s2=s1, modify s2, verify s1 unchanged"],
+                        qna: [{ q: "What is a constructor?", a: "Special function called automatically when object is created. Same name as class, no return type. Sets the initial state of the object." }, { q: "What is a destructor?", a: "Called automatically when object goes out of scope or delete is used. ~ClassName(). Used to release resources like file handles or heap memory." }, { q: "What is an initializer list?", a: "BankAccount(string n, double b) : owner(n), balance(b) {} — initializes members BEFORE the constructor body runs. Required for const members and references inside a class." }]
+                    },
+                    {
+                        day: "Day 27", label: "Day 27", ls: "", topic: "Ch 15+18 — Inheritance + Virtual + Ch 17 — Operator overloading", chap: "Ch 15, 17, 18",
+                        theory: "Derived inherits base. virtual enables runtime polymorphism. Override overrides virtual. Operator overloading redefines operators.",
+                        code: `<span class="pp">#include &lt;iostream&gt;</span>
+<span class="kw">using namespace</span> std;
+
+<span class="kw">class</span> Shape {
+<span class="kw">public</span>:
+    <span class="kw">virtual double</span> <span class="fn">area</span>()=<span class="num">0</span>;  <span class="cm">// pure virtual — abstract</span>
+    <span class="kw">virtual</span> ~<span class="fn">Shape</span>(){}        <span class="cm">// virtual destructor always</span>
+};
+<span class="kw">class</span> Circle : <span class="kw">public</span> Shape {
+    <span class="kw">double</span> r;
+<span class="kw">public</span>:
+    <span class="fn">Circle</span>(<span class="kw">double</span> r):r(r){}
+    <span class="kw">double</span> <span class="fn">area</span>() <span class="kw">override</span> { <span class="kw">return</span> <span class="num">3.14159</span>*r*r; }
+};
+<span class="cm">// Operator overloading</span>
+<span class="kw">class</span> Complex {
+<span class="kw">public</span>:
+    <span class="kw">double</span> r,i;
+    <span class="fn">Complex</span>(<span class="kw">double</span> r,<span class="kw">double</span> i):r(r),i(i){}
+    Complex <span class="kw">operator</span>+(Complex c){ <span class="kw">return</span> {r+c.r, i+c.i}; }
+    <span class="kw">friend</span> ostream& <span class="kw">operator</span>&lt;&lt;(ostream& o, Complex c){
+        o&lt;&lt;c.r&lt;&lt;<span class="str">"+"</span>&lt;&lt;c.i&lt;&lt;<span class="str">"i"</span>; <span class="kw">return</span> o;
+    }
+};`,
+                        tasks: ["Shape hierarchy: Circle, Rectangle, Triangle — polymorphic area() via Shape*", "Overload +, -, * for Complex number class", "Overload >> and << for Student: cin>>s and cout<<s"],
+                        qna: [{ q: "What is pure virtual function?", a: "virtual double area()=0; — no implementation in base. Forces derived classes to implement it. Makes base class abstract — cannot create base objects." }, { q: "Why always virtual destructor in base class?", a: "Without it, deleting a derived object through a base pointer only calls the base destructor — memory leak. Virtual destructor ensures derived destructor runs too." }, { q: "Why return ostream& from << operator?", a: "To enable chaining: cout << s1 << s2 << endl. Each << returns the same cout so the next << can continue on the same output stream." }]
+                    },
+                    {
+                        day: "Day 28", label: "Test Day", ls: "background:#FCEBEB;color:#A32D2D", topic: "Week 4 Test + Ch 19–20 File & Exception in C++", chap: "Ch 19–20, full revision",
+                        theory: "C++ fstream file handling. Exception handling: try-catch-throw. Custom exception classes. Then comprehensive revision.",
+                        code: `<span class="pp">#include &lt;fstream&gt;
+#include &lt;stdexcept&gt;
+#include &lt;iostream&gt;</span>
+<span class="kw">using namespace</span> std;
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="cm">// C++ file write</span>
+    ofstream out(<span class="str">"data.txt"</span>);
+    <span class="kw">if</span>(!out) <span class="kw">throw</span> runtime_error(<span class="str">"Cannot open file"</span>);
+    out &lt;&lt; <span class="str">"Nitin 20 88.5"</span> &lt;&lt; endl;
+    out.<span class="fn">close</span>();
+
+    <span class="cm">// Exception handling</span>
+    <span class="kw">try</span> {
+        <span class="kw">int</span> age; cin &gt;&gt; age;
+        <span class="kw">if</span>(age &lt; <span class="num">0</span>)
+            <span class="kw">throw</span> invalid_argument(<span class="str">"Age cannot be negative"</span>);
+        <span class="kw">if</span>(age &gt; <span class="num">150</span>)
+            <span class="kw">throw</span> out_of_range(<span class="str">"Age unrealistically large"</span>);
+        cout &lt;&lt; <span class="str">"Valid age: "</span> &lt;&lt; age &lt;&lt; endl;
+    }
+    <span class="kw">catch</span>(invalid_argument&amp; e){ cout&lt;&lt;<span class="str">"Error: "</span>&lt;&lt;e.<span class="fn">what</span>()&lt;&lt;endl; }
+    <span class="kw">catch</span>(out_of_range&amp; e)     { cout&lt;&lt;<span class="str">"Range: "</span>&lt;&lt;e.<span class="fn">what</span>()&lt;&lt;endl; }
+    <span class="kw">catch</span>(...){ cout&lt;&lt;<span class="str">"Unknown error\\n"</span>; } <span class="cm">// catch-all</span>
+    <span class="kw">return</span> <span class="num">0</span>;
+}`,
+                        tasks: ["Save/load Student objects to text file using fstream operators", "Custom exception: InsufficientFundsException for bank — carries amount", "Final test: BankAccount with file persistence and exception handling combined"],
+                        qna: [{ q: "ifstream vs ofstream vs fstream?", a: "ifstream = read only. ofstream = write only. fstream = both read and write. Use the most restrictive type — helps catch wrong usage at compile time." }, { q: "catch(...) — what does it catch?", a: "Catches any exception type — acts as a catch-all default handler. Always place it last. Prevents program crash from completely unexpected exception types." }, { q: "Why create custom exception classes?", a: "Standard exceptions are generic. Custom ones carry specific context — which account had a problem, what the invalid amount was. Debugging becomes much easier." }]
+                    }
+                ]
+            }
+        };
+
+        function buildWeek(n) {
+            const w = weeks[n];
+            const el = document.getElementById('p' + n);
+            if (el.children.length) return;
+            el.innerHTML = `<span class="wk-badge" style="${w.bstyle}">${w.badge}</span><p class="wk-desc" style="margin-bottom:12px">${w.desc}</p>`;
+            w.days.forEach(d => {
+                const card = document.createElement('div');
+                card.className = 'day-card';
+                card.innerHTML = `<div class="day-head" onclick="tog(this)">
+      <span class="dlabel" style="${d.ls || 'background:#f0efe9;color:#666'}">${d.day}</span>
+      <span class="dtitle">${d.topic}</span>
+      <span class="dchap">${d.chap}</span>
+      <span class="darrow">›</span>
+    </div>
+    <div class="dbody">
+      <div class="sl">Theory</div>
+      <div style="font-size:12.5px;color:#555;line-height:1.6;margin-bottom:8px">${d.theory}</div>
+      <div class="sl">Practical code</div>
+      <pre>${d.code}</pre>
+      <div class="sl" style="margin-top:10px">Practice tasks</div>
+      <ul class="tl">${d.tasks.map(t => `<li>${t}</li>`).join('')}</ul>
+      <div class="sl" style="margin-top:10px">Q&amp;A</div>
+      <div class="qna">${d.qna.map(q => `<div><div class="qq">Q: ${q.q}</div><div class="aa">A: ${q.a}</div></div>`).join('')}</div>
+    </div>`;
+                el.appendChild(card);
+            });
+        }
+
+        function tog(h) {
+            const b = h.nextElementSibling, a = h.querySelector('.darrow');
+            const open = b.classList.contains('open');
+            b.classList.toggle('open', !open);
+            a.classList.toggle('open', !open);
+        }
+
+        function sw(n, btn) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.wtab').forEach(t => t.classList.remove('active'));
+            document.getElementById('p' + n).classList.add('active');
+            btn.classList.add('active');
+            if (n <= 4) buildWeek(n);
+        }
+
+        buildWeek(1);
+        setTimeout(() => { const h = document.querySelector('#p1 .day-head'); if (h) h.click(); }, 100);
+    </script>
+</body>
+
+</html>
